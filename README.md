@@ -1,12 +1,36 @@
-# YouTube Playlist Planner
+# 🎬 YouTube Playlist Planner
 
-The **YouTube Playlist Planner** is a structured, productivity-focused web application designed to help self-directed learners transform raw YouTube playlists (such as tutorials, bootcamps, and lectures) into structured, personalized study plans. 
+> Transform chaotic YouTube playlists into structured, gamified learning journeys with spaced repetition.
 
-By default, YouTube playlists are flat, unstructured lists of videos that lack scheduling tools, progress tracking, and memory retention mechanisms. This application solves these problems by parsing playlists, grouping videos into logical topics, distributing them into daily calendars based on user availability (without splitting individual videos), and scheduling automated reviews using a Leitner-spaced repetition model.
+The **YouTube Playlist Planner** is a productivity-focused web application designed to help self-directed learners master YouTube content efficiently. It solves the problem of unstructured playlists by automatically grouping videos into topics, distributing them across personalized study schedules, tracking progress with gamification, and reinforcing learning through spaced repetition.
+
+**Key Problem Solved**: YouTube playlists are flat, unstructured lists that lack scheduling tools, progress tracking, and memory retention mechanisms. This app transforms them into intelligent study roadmaps.
+
 
 ---
 
-## Core Features
+## 🚀 Quick Start
+
+### 1. Clone & Install
+```bash
+git clone https://github.com/Nishank018/ytPlaylistPlanner.git
+cd ytPlaylistPlanner
+npm install
+```
+
+### 2. Run Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### 3. Try It Out
+- Use a **Mock Playlist** (React, DSA, or Python) for instant demo
+- Or paste your own **YouTube Playlist URL** to get started
+
+---
+
+## 📊 Tech Stack
 
 ### 1. Playlist Parsing & Auto-Grouping
 * **Playlist Metadata Extraction**: Parses public YouTube playlist URLs to extract video titles, descriptions, durations, and thumbnails.
@@ -48,52 +72,96 @@ To combat the forgetting curve, the application integrates a Spaced Repetition S
   - **Fail**: Resets the topic back to Box 1 (re-scheduling the review for the next day).
 * **Unified Planner View**: Shows outstanding review tasks on the calendar alongside new video tasks.
 
+## 📊 Tech Stack
+
+- **Frontend**: React 19, Next.js 16.2.7
+- **Styling**: Tailwind CSS v4 + PostCSS
+- **Database**: Supabase (PostgreSQL) or LocalStorage
+- **Animations**: Framer Motion, Canvas Confetti
+- **Icons**: Lucide React
+- **Language**: TypeScript 5
+
+### Project Structure
+```
+src/
+├── app/                    # Next.js app directory
+├── components/
+│   ├── features/          # Feature modules (calendar, dashboard, scheduler, etc.)
+│   ├── shared/            # Shared components (modals, players)
+│   └── ui/                # UI primitives (buttons, inputs, cards, etc.)
+├── context/               # React Context (PlannerContext)
+├── hooks/                 # Custom hooks (useRevision)
+├── lib/
+│   ├── db/               # Database abstraction layer
+│   └── youtube/          # YouTube playlist parsing & scheduling
+├── styles/               # Global styles
+└── types/                # TypeScript definitions
+```
+
 ---
 
-## Installation & Setup
+## ✨ Core Features
 
-This is a Next.js application built with React, Tailwind CSS (v4), and Supabase.
+---
 
-### 1. Prerequisites
-Ensure you have Node.js (version 20+ recommended) and npm (or yarn/pnpm/bun) installed.
+## 📦 Detailed Setup & Configuration
 
-### 2. Clone and Install Dependencies
-Install all required packages (including Supabase JS, canvas-confetti, framer-motion, and Lucide React):
+### Prerequisites
+- Node.js 20+ and npm (or yarn/pnpm/bun)
+- A YouTube playlist URL (or use built-in mock playlists)
+- (Optional) Supabase project for cloud storage
+
+### Installation Steps
+
+#### 1. Clone and Install Dependencies
 ```bash
+git clone https://github.com/Nishank018/ytPlaylistPlanner.git
+cd ytPlaylistPlanner
 npm install
 ```
 
-### 3. Next.js Scripts
-Manage the application lifecycle with the following npm commands:
-* **Start Development Server**: Runs a hot-reloading server on `http://localhost:3000`.
-  ```bash
-  npm run dev
-  ```
-* **Build for Production**: Compiles the application, runs Type checks, and outputs a highly optimized build.
-  ```bash
-  npm run build
-  ```
-* **Start Production Server**: Starts the built Next.js server.
-  ```bash
-  npm run start
-  ```
-* **Lint Code**: Checks the codebase for code style issues and potential errors.
-  ```bash
-  npm run lint
-  ```
+#### 2. Available npm Scripts
+| Command | Purpose |
+|---------|---------|
+| `npm run dev` | Start development server on `http://localhost:3000` (hot-reloading) |
+| `npm run build` | Build for production (type-checked and optimized) |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint checks |
 
-### 4. Environment Parameters
-The application operates in two storage modes (managed automatically at runtime):
-* **Local Mode (LocalStorage)**: Runs entirely offline on the client side if no environment variables are defined.
-* **Cloud Mode (Supabase)**: Connects to a persistent Postgres database if the following environment variables are present in your environment or a `.env.local` file at the project root:
+#### 3. Database Configuration
 
+The app **automatically detects** which database to use:
+
+**Local Mode (Default - No Configuration Needed)**
+```bash
+npm run dev
+# Runs entirely offline using browser LocalStorage
+# Perfect for testing and demo purposes
+```
+
+**Cloud Mode (Optional - Requires Supabase)**
+Create a `.env.local` file at the project root:
 ```env
 NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 ```
 
-### 5. Supabase Migration Instructions
-To provision your Supabase instance, navigate to the **SQL Editor** in your Supabase dashboard and run the DDL schema code below. This sets up the relational tables, foreign key constraints with cascading deletes, performance indexes, and Row-Level Security (RLS) policies.
+Then restart the development server:
+```bash
+npm run dev
+```
+
+#### 4. Supabase Setup (Optional)
+
+If you want to use cloud storage, follow these steps:
+
+1. **Create a Supabase account** at [supabase.com](https://supabase.com)
+2. **Create a new project** and get your project URL and anon key from settings
+3. **Run the SQL Migration** in Supabase's SQL Editor:
+   - Copy the entire SQL schema from the README section below (Tables: profiles, playlists, topics, videos, etc.)
+   - Paste and execute it in your Supabase SQL Editor
+4. **Configure environment variables** as shown above
+5. **Restart the app** - it will now use Supabase for persistent storage
 
 ```sql
 -- Enable UUID extension if not enabled
