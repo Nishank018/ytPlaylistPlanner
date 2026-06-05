@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  
+  --color-streak: hsl(var(--streak));
+  --color-revision: hsl(var(--revision));
+  --color-success: hsl(var(--success));
+}
+
+:root {
+  /* --- Notion Light Mode --- */
+  --background: 0 0% 100%;
+  --foreground: 240 10% 4%;
+  
+  --card: 0 0% 98%;
+  --card-foreground: 240 10% 4%;
+  
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 4%;
+  
+  --primary: 262.1 83.3% 57.8%; /* Vibrant Violet */
+  --primary-foreground: 210 20% 98%;
+  
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 20% 98%;
+  
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 262.1 83.3% 57.8%;
+  
+  --streak: 24 95% 53%; /* Flame Orange */
+  --revision: 280 85% 55%; /* Spaced Repetition Purple */
+  --success: 142.1 76.2% 36.3%; /* Progress Green */
+}
+
+.dark {
+  /* --- Linear Dark Mode --- */
+  --background: 240 10% 3.9%; /* Rich Near-Black */
+  --foreground: 0 0% 98%;
+  
+  --card: 240 10% 5.9%; /* Faint Dark Grey Panel */
+  --card-foreground: 0 0% 98%;
+  
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  
+  --primary: 263.4 70% 50.4%; /* Neon Violet */
+  --primary-foreground: 210 20% 98%;
+  
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  
+  --border: 240 3.7% 12%; /* Thin Sleek Micro-Borders */
+  --input: 240 3.7% 12%;
+  --ring: 263.4 70% 50.4%;
+  
+  --streak: 24 95% 50%; /* Glowing Flame Orange */
+  --revision: 280 85% 60%; /* Glowing Spaced Repetition Purple */
+  --success: 142.1 70.6% 45.3%; /* Glowing Teal/Green */
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Custom CSS animations and utility styles */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+.streak-active {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  filter: drop-shadow(0 0 6px hsl(var(--streak) / 0.4));
+}
